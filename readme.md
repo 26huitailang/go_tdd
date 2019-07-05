@@ -22,6 +22,15 @@ https://studygolang.gitbook.io/learn-go-with-tests/go-ji-chu/integers
 
 然后，在你的代码目录中运行 errcheck .。
 
+### 依赖注入
+
+dependency injection
+
+- 你不需要一个框架
+- 它不会过度复杂化你的设计
+- 它易于测试
+- 它能让你编写优秀和通用的函数
+
 ## 注意事项
 
 - 需要注意的是 reflect.DeepEqual 不是「类型安全」的，所以有时候会发生比较怪异的行为。
