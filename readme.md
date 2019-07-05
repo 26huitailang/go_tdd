@@ -61,6 +61,10 @@ mocking：
 
 [过早的优化是万恶之源 —— Donald Knuth](http://wiki.c2.com/?PrematureOptimization)
 
+## interface
+
+如果你想实现函数的多态性，请考虑是否可以围绕接口（不是 interface 类型，这里容易让人困惑）设计它，以便用户可以用多种类型来调用你的函数，这些类型实现了函数工作所需要的任何方法。
+
 ## 注意事项
 
 - 需要注意的是 reflect.DeepEqual 不是「类型安全」的，所以有时候会发生比较怪异的行为。
