@@ -1,4 +1,10 @@
-https://studygolang.gitbook.io/learn-go-with-tests/go-ji-chu/integers
+# TDD pratice
+
+![build-status](https://travis-ci.com/26huitailang/go_tdd.svg?branch=master)
+
+## 参考
+
+- [learn-go-with-tests](https://studygolang.gitbook.io/learn-go-with-tests/go-ji-chu/integers)
 
 ## 测试覆盖
 
@@ -47,6 +53,13 @@ mocking：
 - 虽然 Go 允许你测试私有函数，但我将避免它作为私有函数与实现有关。
 - 我觉得如果一个测试 超过 3 个模拟，那么它就是警告 —— 是时候重新考虑设计。
 - 小心使用监视器。监视器让你看到你正在编写的算法的内部细节，这是非常有用的，但是这意味着你的测试代码和实现之间的耦合更紧密。如果你要监视这些细节，请确保你真的在乎这些细节。
+
+## 不要过早优化
+
+遵循三个步骤:
+[使它运作，使它正确，使它快速](http://wiki.c2.com/?MakeItWorkMakeItRightMakeItFast)
+
+[过早的优化是万恶之源 —— Donald Knuth](http://wiki.c2.com/?PrematureOptimization)
 
 ## 注意事项
 
