@@ -55,9 +55,8 @@ func createSchema(db *pg.DB) error {
 	for _, model := range []interface{}{(*User)(nil)} {
 		err := db.CreateTable(model, &orm.CreateTableOptions{
 			IfNotExists: true,
-			Temp:        true,
+			// Temp:        true,
 		})
-		println("hello")
 		if err != nil {
 			panic(err)
 		}
