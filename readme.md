@@ -10,6 +10,11 @@
 
     go test -cover
 
+输出结果：
+
+    go test -v -coverprofile cover.out [FILENAME(可选)]
+    go tool cover -html=cover.out -o cover.html
+
 ## 基准测试
 
     go test -bench=.
