@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	poker "github.com/26huitailang/go_tdd/command-line"
+	poker "github.com/26huitailang/go_tdd/time"
 )
 
 const dbFilename = "game.db.json"
