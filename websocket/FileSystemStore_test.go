@@ -8,8 +8,28 @@ import (
 	poker "github.com/26huitailang/go_tdd/websocket"
 )
 
+func createTempFile(t *testing.T, initialData string) (*os.File, func()) {
+	t.Helper()
+
+	tmpfile, err := ioutil.TempFile("", "db")
+
+	if err != nil {
+		t.Fatalf("could not create temp file %v", err)
+	}
+
+	tmpfile.Write([]byte(initialData))
+
+	removeFile := func() {
+		tmpfile.Close()
+		os.Remove(tmpfile.Name())
+	}
+
+	return tmpfile, removeFile
+}
+
 func TestFileSystemStore(t *testing.T) {
-	t.Run("league sorted", func(t *testing.T) {
+
+	t.Run("League sorted", func(t *testing.T) {
 		database, cleanDatabase := createTempFile(t, `[
 			{"Name": "Cleo", "Wins": 10},
 			{"Name": "Chris", "Wins": 33}]`)
@@ -22,12 +42,13 @@ func TestFileSystemStore(t *testing.T) {
 		got := store.GetLeague()
 
 		want := []poker.Player{
-			{"Chris", 33},
-			{"Cleo", 10},
+			{Name: "Chris", Wins: 33},
+			{Name: "Cleo", Wins: 10},
 		}
 
 		assertLeague(t, got, want)
 
+		// read again
 		got = store.GetLeague()
 		assertLeague(t, got, want)
 	})
@@ -43,9 +64,7 @@ func TestFileSystemStore(t *testing.T) {
 		assertNoError(t, err)
 
 		got := store.GetPlayerScore("Chris")
-
 		want := 33
-
 		assertScoreEquals(t, got, want)
 	})
 
@@ -65,7 +84,8 @@ func TestFileSystemStore(t *testing.T) {
 		want := 34
 		assertScoreEquals(t, got, want)
 	})
-	t.Run("store wins for not existing players", func(t *testing.T) {
+
+	t.Run("store wins for existing players", func(t *testing.T) {
 		database, cleanDatabase := createTempFile(t, `[
 			{"Name": "Cleo", "Wins": 10},
 			{"Name": "Chris", "Wins": 33}]`)
@@ -92,30 +112,13 @@ func TestFileSystemStore(t *testing.T) {
 	})
 }
 
-func assertScoreEquals(t *testing.T, got int, want int) {
+func assertScoreEquals(t *testing.T, got, want int) {
 	t.Helper()
 	if got != want {
-		t.Errorf("Player score got %d, want %d", got, want)
+		t.Errorf("got %d want %d", got, want)
 	}
 }
 
-func createTempFile(t *testing.T, initialData string) (*os.File, func()) {
-	t.Helper()
-
-	tmpfile, err := ioutil.TempFile("", "db")
-
-	if err != nil {
-		t.Fatalf("could not create temp file %v", err)
-	}
-
-	tmpfile.Write([]byte(initialData))
-
-	removeFile := func() {
-		os.Remove(tmpfile.Name())
-	}
-	println(tmpfile.Name())
-	return tmpfile, removeFile
-}
 func assertNoError(t *testing.T, err error) {
 	t.Helper()
 	if err != nil {

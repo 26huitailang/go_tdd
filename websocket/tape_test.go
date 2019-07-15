@@ -7,11 +7,11 @@ import (
 	poker "github.com/26huitailang/go_tdd/websocket"
 )
 
-func TestTapeWrite(t *testing.T) {
+func TestTape_Write(t *testing.T) {
 	file, clean := createTempFile(t, "12345")
 	defer clean()
 
-	tape := &poker.Tape{file}
+	tape := &poker.Tape{File: file}
 
 	tape.Write([]byte("abc"))
 
@@ -20,7 +20,8 @@ func TestTapeWrite(t *testing.T) {
 
 	got := string(newFileContents)
 	want := "abc"
+
 	if got != want {
-		t.Errorf("got '%s', want '%s'", got, want)
+		t.Errorf("got %q want %q", got, want)
 	}
 }

@@ -1,10 +1,9 @@
 package poker
 
 import (
+	"github.com/gorilla/websocket"
 	"log"
 	"net/http"
-
-	"github.com/gorilla/websocket"
 )
 
 type playerServerWS struct {

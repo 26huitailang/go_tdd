@@ -3,11 +3,10 @@ package poker
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/gorilla/websocket"
 	"html/template"
 	"net/http"
 	"strconv"
-
-	"github.com/gorilla/websocket"
 )
 
 // PlayerStore stores score information about players

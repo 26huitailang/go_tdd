@@ -8,13 +8,13 @@ import (
 	poker "github.com/26huitailang/go_tdd/websocket"
 )
 
-const dbFilename = "game.db.json"
+const dbFileName = "game.db.json"
 
 func main() {
-	db, err := os.OpenFile(dbFilename, os.O_RDWR|os.O_CREATE, 0666)
+	db, err := os.OpenFile(dbFileName, os.O_RDWR|os.O_CREATE, 0666)
 
 	if err != nil {
-		log.Fatalf("problem opening %s %v", dbFilename, err)
+		log.Fatalf("problem opening %s %v", dbFileName, err)
 	}
 
 	store, err := poker.NewFileSystemPlayerStore(db)
