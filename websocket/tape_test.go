@@ -1,15 +1,17 @@
-package poker
+package poker_test
 
 import (
 	"io/ioutil"
 	"testing"
+
+	poker "github.com/26huitailang/go_tdd/websocket"
 )
 
 func TestTapeWrite(t *testing.T) {
 	file, clean := createTempFile(t, "12345")
 	defer clean()
 
-	tape := &tape{file}
+	tape := &poker.Tape{file}
 
 	tape.Write([]byte("abc"))
 
